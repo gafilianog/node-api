@@ -41,7 +41,29 @@ const login = async (req, res) => {
     });
 }
 
+const register = async (req, res) => {
+    const { name, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const [user] = await userModel.getUserByName(name);
+
+    if (user.length > 0) {
+        return res.status(409).json({
+            error: 'User already exists'
+        });
+    }
+
+    const [newUser] = await userModel.createNewUser(name, hashedPassword);
+
+    if (newUser) {
+        return res.status(201).json({
+            message: 'User created'
+        });
+    }
+}
+
 module.exports = {
     getAllUsers,
-    login
+    login,
+    register
 };

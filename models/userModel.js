@@ -12,13 +12,14 @@ const getUserByName = (name) => {
     return dbPool.execute(query);
 }
 
-const createNewUser = (body) => {
-    const stmt = `INSERT INTO users VALUES (0, ${body.name}, ${body.password})`;
+const createNewUser = (name, hashedPassword) => {
+    const stmt = `INSERT INTO users VALUES (0, '${name}', '${hashedPassword}')`;
     
     return dbPool.execute(stmt);
 };
 
 module.exports = {
     getAllUsers,
-    getUserByName
+    getUserByName,
+    createNewUser
 };
