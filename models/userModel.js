@@ -18,8 +18,15 @@ const createNewUser = (name, hashedPassword) => {
     return dbPool.execute(stmt);
 };
 
+const deleteUserByName = (name) => {
+    const query = `DELETE FROM users WHERE name='${name}'`;
+
+    return dbPool.execute(query);
+}
+
 module.exports = {
     getAllUsers,
     getUserByName,
-    createNewUser
+    createNewUser,
+    deleteUserByName
 };

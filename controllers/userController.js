@@ -53,11 +53,27 @@ const register = async (req, res) => {
         });
     }
 
-    const [newUser] = await userModel.createNewUser(name, hashedPassword);
+    await userModel.createNewUser(name, hashedPassword);
 
-    if (newUser) {
-        return res.status(201).json({
-            message: 'User created'
+    return res.status(201).json({
+        message: 'User created'
+    });
+}
+
+const deleteUser = async (req, res) => {
+    const { name } = req.params;
+
+    try {
+        await userModel.deleteUserByName(name);
+
+        res.json({
+            message: 'Delete user success',
+            data: null
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Delete error',
+            serverMessage: error.message
         });
     }
 }
@@ -65,5 +81,6 @@ const register = async (req, res) => {
 module.exports = {
     getAllUsers,
     login,
-    register
+    register,
+    deleteUser
 };
