@@ -2,9 +2,14 @@
   "name": "db-practice",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start-dev": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gafilianog/db-practice.git"
   },
   "keywords": [],
   "author": "",
