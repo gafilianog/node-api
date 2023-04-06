@@ -6,14 +6,14 @@ const getAllUsers = () => {
     return dbPool.execute(query);
 };
 
-const getUserByName = (name) => {
-    const query = `SELECT * FROM users WHERE name='${name}';`;
+const getUserByEmail = (email) => {
+    const query = `SELECT * FROM users WHERE email='${email}';`;
 
     return dbPool.execute(query);
 }
 
-const createNewUser = (name, hashedPassword) => {
-    const stmt = `INSERT INTO users VALUES (0, '${name}', '${hashedPassword}')`;
+const createNewUser = (name, email, hashedPassword) => {
+    const stmt = `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${hashedPassword}')`;
     
     return dbPool.execute(stmt);
 };
@@ -26,7 +26,7 @@ const deleteUserByName = (name) => {
 
 module.exports = {
     getAllUsers,
-    getUserByName,
+    getUserByEmail,
     createNewUser,
     deleteUserByName
 };
