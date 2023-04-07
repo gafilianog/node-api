@@ -15,6 +15,6 @@ router.post('/login', userController.login);
 router.get('/home', verifyToken, userController.home);
 router.post('/register', userController.register);
 router.post('/refresh-token', userController.refreshToken);
-router.delete('/delete/:name', userController.deleteUser);
+router.delete('/delete/:email', userController.deleteUser);
 
 module.exports = router;
