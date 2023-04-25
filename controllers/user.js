@@ -86,7 +86,7 @@ const deleteUser = async (req, res) => {
     const { name } = req.params;
 
     try {
-        await userModel.deleteUserByName(name);
+        await userModel.deleteUserByEmail(name);
 
         res.json({
             message: 'Delete user success',

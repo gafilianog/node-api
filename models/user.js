@@ -18,7 +18,7 @@ const createNewUser = (name, email, hashedPassword) => {
     return dbPool.execute(stmt);
 };
 
-const deleteUserByName = (email) => {
+const deleteUserByEmail = (email) => {
     const query = `DELETE FROM users WHERE email='${email}'`;
 
     return dbPool.execute(query);
@@ -28,5 +28,5 @@ module.exports = {
     getAllUsers,
     getUserByEmail,
     createNewUser,
-    deleteUserByName
+    deleteUserByEmail
 };
