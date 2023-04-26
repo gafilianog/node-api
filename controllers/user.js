@@ -9,7 +9,7 @@ const home = (req, res) => {
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    const [user] = await userModel.getUserByEmail(email);
+    const user = await userModel.getUserByEmail(email);
 
     if (!user) {
         return res.status(401).json({
@@ -17,7 +17,7 @@ const login = async (req, res) => {
         });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user[0].password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
         
     if (!isPasswordValid) {
         return res.status(401).json({
@@ -33,7 +33,14 @@ const login = async (req, res) => {
     res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
 
     res.status(200).json({
-        message: 'Access granted'
+        status: 'OK',
+        message: 'Logged in',
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password
+        }
     });
 }
 

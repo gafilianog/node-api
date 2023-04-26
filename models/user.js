@@ -6,10 +6,12 @@ const getAllUsers = () => {
     return dbPool.execute(query);
 };
 
-const getUserByEmail = (email) => {
+const getUserByEmail = async (email) => {
     const query = `SELECT * FROM users WHERE email='${email}';`;
 
-    return dbPool.execute(query);
+    const [user] = await dbPool.execute(query);
+
+    return user[0];
 }
 
 const createNewUser = (name, email, hashedPassword) => {
